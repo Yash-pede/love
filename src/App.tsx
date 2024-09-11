@@ -8,11 +8,13 @@ const App = () => {
 
   function moveButton() {
     const button = document.getElementById("noButton");
-    const x = Math.random() * (window.innerWidth - button.offsetWidth);
-    const y = Math.random() * (window.innerHeight - button.offsetHeight);
-    button.style.position = "absolute";
-    button.style.left = `${x}px`;
-    button.style.top = `${y}px`;
+    if (button) {
+      const x = Math.random() * (window.innerWidth - button.offsetWidth);
+      const y = Math.random() * (window.innerHeight - button.offsetHeight);
+      button.style.position = "absolute";
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+    }
   }
 
   return (
@@ -31,7 +33,9 @@ const App = () => {
                 onSubmit={(e) => {
                   e.preventDefault();
                   setLoveSteps(1);
-                  setName(e.target[0].value);
+                  const form = e.target as HTMLFormElement;
+                  const input = form.elements[0] as HTMLInputElement;
+                  setName(input.value);
                 }}
                 className="flex flex-col gap-4"
               >
